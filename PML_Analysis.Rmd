@@ -75,21 +75,17 @@ registerDoSEQ()
 
 print(model_fast)
 
-
-#Display model summary
-print(model_rf)
-
 # Model Evaluation
 
 ## Cross-Validation Results
 
-print(model_rf$results)
-print(paste("Best tuning parameter (mtry):", model_rf$bestTune$mtry))
+print(model_fast$results)
+print(paste("Best tuning parameter (mtry):", model_fast$bestTune$mtry))
 
 ## Validation Set Performance
 
 # Make predictions on validation set
-predictions <- predict(model_rf, validation)
+predictions <- predict(model_fast, validation)
 
 # Convert to factors with matching levels
 validation_classes <- factor(validation$classe)
@@ -107,11 +103,14 @@ cat("\n=== PERFORMANCE SUMMARY ===\n")
 cat("Accuracy:", round(accuracy * 100, 2), "%\n")
 cat("Out-of-Sample Error:", round(oos_error * 100, 2), "%\n")
 
-var_imp <- varImp(model_rf)
+var_imp <- varImp(model_fast)
 plot(var_imp, top = 20, main = "Top 20 Most Important Features")
 
+# Clean test data with same preprocessing as training data
+test_clean <- test_data[, colnames(test_data) %in% colnames(train_clean)]
+
 #Predict on test set
-final_pred <- predict(model_rf, test_data)
+final_pred <- predict(model_fast, test_clean)
 
 #Create results table
 results <- data.frame(

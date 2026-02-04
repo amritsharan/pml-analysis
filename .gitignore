@@ -1,0 +1,36 @@
+# R specific files
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Cache and temporary files
+.cache/
+*.tmp
+*.temp
+
+# Data files (if downloading)
+pml-training.csv
+pml-testing.csv
+*.csv
+
+# Output files
+*.html
+*.md
+!README.md
+
+# System files
+.DS_Store
+Thumbs.db
+.Spotlight-V100
+.Trashes
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dependencies
+renv/
+packrat/
